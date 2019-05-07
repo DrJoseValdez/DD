@@ -3,11 +3,13 @@ library(readxl)
 library(plyr)
 library(dplyr)
 library(MASS)
+library(here)
 
 #load data
-link <-  read.csv("C:/Users/au623804/OneDrive/_Dark diversity/data/fungi_link.csv", encoding="UTF-8", sep=";")
-cleaned_link<- read.csv("C:/Users/au623804/OneDrive/_Dark diversity/data/linkage_rasmus_cleaned.csv", encoding="UTF-8", sep=";")
-SamletArtsdata <- read_excel("SamletArtsdata.xlsx")
+link <- read.csv(here("data","fungi_link.csv"), encoding="UTF-8", sep=";")
+cleaned_link <- read.csv(here("data", "linkage_rasmus_cleaned.csv"), encoding="UTF-8", sep=";")
+
+SamletArtsdata <- read_excel(here("data","SamletArtsdata.xlsx"))
 SamletArtsdata$latin=as.factor(SamletArtsdata$latin)
 
 
@@ -133,4 +135,5 @@ darkdiv=merge(darkdiv, predicted.nogenus)
 darkdiv$DD.nogenus=darkdiv$predicted.nogenus - darkdiv$observed
 darkdiv$relative_DD.nogenus=darkdiv$DD.nogenus/darkdiv$predicted.nogenus
 
-write.csv(darkdiv, "darkdiv.csv")
+write.csv(darkdiv, here("data","darkdiv.csv"))
+
